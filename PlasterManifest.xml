@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<plasterManifest
+  schemaVersion="1.1"
+  templateType="Item" xmlns="http://www.microsoft.com/schemas/PowerShell/Plaster/v1">
+  <metadata>
+    <name>DefaultPlasterTemplate</name>
+    <id>83f5d38b-f206-4f8b-82de-42ad773d17e8</id>
+    <version>1.0.0</version>
+    <title>Default Plaster Template</title>
+    <description></description>
+    <author>Sean Quinlan</author>
+    <tags></tags>
+  </metadata>
+  <parameters>
+    <parameter name='AuthorName' type="user-fullname" prompt="Author's Name" />
+    <parameter name='AuthorEmail' type="user-email" prompt="Author's email" />
+    <parameter name='ModuleName' type="text" prompt="Name of module" />
+    <parameter name='ModuleDescription' type="text" prompt="Brief description" />
+    <parameter name='ModuleVersion' type="text" prompt="Initial module version" default='0.0.1' />
+  </parameters>
+  <content>
+    <message>Creating module folders</message>
+      <file source='' destination='Public'/>
+      <file source='' destination='Private'/>
+      <file source='' destination='Tests'/>
+    <message>Creating VSCode settings file</message>
+      <file source='.vscode/settings.json' destination=''/>
+    <message>Adding license</message>
+      <templateFile source='LICENSE.md' destination=''/>
+	<message>Adding Module </message>
+      <templateFile source='LICENSE.md' destination=''/>
+    <message>Creating module manifest</message>
+	  <file source='Module.psm1' destination='${PLASTER_PARAM_ModuleName}.psm1'/>
+      <newModuleManifest destination='${PLASTER_PARAM_ModuleName}.psd1'
+                      moduleVersion='$PLASTER_PARAM_ModuleVersion'
+                      rootModule='${PLASTER_PARAM_ModuleName}.psm1'
+                      author='$PLASTER_PARAM_AuthorName'
+                      companyName='${PLASTER_PARAM_AuthorName}'
+                      description='$PLASTER_PARAM_ModuleDescription'
+                      encoding='UTF8-NoBOM'/>
+  </content>
+</plasterManifest>
