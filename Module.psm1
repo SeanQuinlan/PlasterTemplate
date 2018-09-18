@@ -7,11 +7,10 @@ foreach ($Function_Folder in @($Public_Folder,$Private_Folder)) {
         if ($Function_Folder -eq $Public_Folder) { $Public_Functions = $Functions_To_Import.BaseName }
         foreach ($Function in $Functions_To_Import) {
             try {
-                Write-Verbose ('Importing {0} function "{1}"' -f $Function_Folder,$Function.BaseName)
                 . $Function.FullName
             }
             catch {
-                Write-Error ('Error importing function "{0}": {1}' -f $Function.FullName,$_.Error.Message)
+                Write-Error ('Error importing function "{0}": {1}' -f $Function.FullName,$_.Exception.Message)
             }
         }
     }
